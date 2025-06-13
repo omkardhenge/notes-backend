@@ -14,18 +14,20 @@ router.get('/notes', async (req, res) => {
 
 // POST /save-notes
 router.post('/save-notes', async (req, res) => {
-    const { title, content } = req.body;
-    if (!title || !content) {
-        return res.status(400).json({ error: 'Missing title or content' });
+    const { title, content, notePriority } = req.body;
+
+    if (!title || !content || !notePriority) {
+        return res.status(400).json({ error: 'Missing title, content, or priority' });
     }
 
     try {
-        const newNote = new Note({ title, content });
+        const newNote = new Note({ title, content, notePriority });
         await newNote.save();
         res.status(201).json({ message: 'Note saved!' });
     } catch (err) {
         res.status(500).json({ error: 'Error saving note' });
     }
 });
+
 
 module.exports = router;

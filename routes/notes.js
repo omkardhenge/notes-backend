@@ -30,7 +30,7 @@ router.post('/save-notes', async (req, res) => {
 });
 
 //ping
-app.get('/ping', (req, res) => {
+router.get('/ping', (req, res) => {
     res.status(200).send("OK");
 });
 
